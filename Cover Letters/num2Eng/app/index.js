@@ -2,6 +2,7 @@ const React = require('react');
 const ReactDOM = require('react-dom');
 require('./index.css');
 import { numToEng, hundred, tens, numObj } from './utils';
+import List from './components/List.js';
 //component has
 //state
 //lifecycle methods
@@ -13,6 +14,7 @@ class App extends React.Component {
 
     this.state = {
       amount: '',
+      strs: '',
       items: []
     };
     this.onChange = this.onChange.bind(this);
@@ -20,26 +22,31 @@ class App extends React.Component {
   }
 
   onChange(e) {
-    this.setState({
-      amount: e.target.value
+    console.log(e.target.value)
+    numToEng(e.target.value, numObj, numStr => {
+      this.setState({
+        amount: e.target.value,
+        strs: numStr
+      });
     });
   }
   addItem(e) {
     e.preventDefault();
     this.setState({
       amount: '',
-      items: [...this.state.items, this.state.amount]
+      items: [...this.state.items, this.state.strs]
     });
   }
   render() {
     return (
-    <div>
-      <form onSubmit={this.addItem}>
-        <input value={this.state.amount} onChange={this.onChange}></input>
-        <button>SUBMIT</button>
-      </form>
-    </div>
-    )
+      <div>
+        <form onSubmit={this.addItem}>
+          <input value={this.state.amount} onChange={this.onChange} />
+          <button>SUBMIT</button>
+        </form>
+        <List items={this.state.items} />
+      </div>
+    );
   }
 }
 

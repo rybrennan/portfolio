@@ -56,7 +56,7 @@ function hundred(str, obj) {
     return hundo + ten + single
   }
 }
-function numToEng(num, obj) {
+function numToEng(num, obj, cb) {
   let str = num.toString();
   let len = str.length;
   let first = obj[str[0]];
@@ -66,27 +66,27 @@ function numToEng(num, obj) {
 
 
   if (obj[num]) {
-    return obj[num];
+   cb(obj[num]);
   } else if (len === 2) {
-    return tens(str, obj)
+   cb(tens(str, obj))
   } else if (len === 3) {
-    return hundred(str, obj)
+   cb(hundred(str, obj))
   } else if (len === 4) {
-    return first + thou + hundred(str.slice(1), obj)
+   cb(first + thou + hundred(str.slice(1), obj))
   } else if (len === 5) {
-    return tens(str.slice(0,2), obj) + thou + hundred(str.slice(2), obj)
+   cb(tens(str.slice(0,2), obj) + thou + hundred(str.slice(2), obj))
   } else if (len === 6) {
-    return hundred(str.slice(0,3), obj) + thou + hundred(str.slice(3), obj)
+   cb(hundred(str.slice(0,3), obj) + thou + hundred(str.slice(3), obj))
   } else if (len === 7) {
-    return first + mill + hundred(str.slice(1,4), obj) + thou + hundred(str.slice(4,7), obj)
+   cb(first + mill + hundred(str.slice(1,4), obj) + thou + hundred(str.slice(4,7), obj))
   } else if (len === 8) {
-    return tens(str.slice(0,2), obj) + mill + hundred(str.slice(2,5), obj) + thou + hundred(str.slice(5,8), obj)
+    cb(tens(str.slice(0,2), obj) + mill + hundred(str.slice(2,5), obj) + thou + hundred(str.slice(5,8), obj))
   } else if (len === 9) {
-    return hundred(str.slice(0, 3), obj) + mill + hundred(str.slice(3, 6), obj) + thou + hundred(str.slice(6,9), obj)
+   cb(hundred(str.slice(0, 3), obj) + mill + hundred(str.slice(3, 6), obj) + thou + hundred(str.slice(6,9), obj))
   } else if (len === 10) {
-    return first + bill + hundred(str.slice(1, 4), obj) + mill + hundred(str.slice(4, 7), obj) + thou + hundred(str.slice(7,10), obj)
+   cb(first + bill + hundred(str.slice(1, 4), obj) + mill + hundred(str.slice(4, 7), obj) + thou + hundred(str.slice(7,10), obj))
   } else if (len === 11) {
-    return tens(str.slice(0, 2), obj) + bill + hundred(str.slice(2, 5), obj) + mill + hundred(str.slice(4, 7), obj) + thou + hundred(str.slice(8,11), obj)
+   cb(tens(str.slice(0, 2), obj) + bill + hundred(str.slice(2, 5), obj) + mill + hundred(str.slice(4, 7), obj) + thou + hundred(str.slice(8,11), obj))
   }
 }
 
