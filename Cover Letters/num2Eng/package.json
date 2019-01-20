@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "start": "webpack"
+    "start": "webpack --watch"
   },
   "keywords": [],
   "author": "",
