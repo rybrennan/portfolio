@@ -1,6 +1,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-require('index.css');
+require('./index.css');
 //component has
 //state
 //lifecycle methods
