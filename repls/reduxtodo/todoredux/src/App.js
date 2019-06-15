@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Todos from './Todos';
-import AddTodo from './AddTodo';
+import Todos from './components/Todos';
+import AddTodo from './containers/AddTodo';
 import Navbar from './components/Navbar';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
+import store from './store';
+import { Provider } from 'react-redux';
 
 //This is our root component/Container componenet where we are storing our state
 class App extends Component {
@@ -48,6 +50,7 @@ class App extends Component {
 
   render() {
     return (
+      <Provider store={ store }>
       <BrowserRouter>
         <div className="todo-app container">
           <Navbar />
@@ -59,6 +62,7 @@ class App extends Component {
             <AddTodo addTodo={this.addTodo} />
         </div>
       </BrowserRouter>
+      </Provider>
     );
   }
 }

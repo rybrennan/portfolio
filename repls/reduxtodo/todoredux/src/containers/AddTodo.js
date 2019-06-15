@@ -1,5 +1,6 @@
 //need local state bc we need what the user types into the user fields
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 
 class AddTodo extends Component {
@@ -18,8 +19,15 @@ class AddTodo extends Component {
     this.setState({
       content: ''
     })
-
   }
+  addTodo = (content) => {
+    //update redux here
+    this.props.dispatch({type: 'ADD_TODO', content})
+    this.setState({
+      content: ''
+    })
+  }
+
   render() {
     return (
         <div>
@@ -31,5 +39,5 @@ class AddTodo extends Component {
     )
   }
 }
-
-export default AddTodo
+//we can now dispatch actions to our store
+export default connect()(AddTodo)
